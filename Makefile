@@ -2,13 +2,13 @@
 #    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #    
 #    File: Makefile
-#    Version: 3.0.0
+#    Version: 1.0.0
 #    Copyright: (C) 2012 by Enzo Roberto Verlato
 #    Contact: enzover@ig.com.br
 #    All rights reserved.
 #    
 # --------------------------------------------------------------------------
-#    This file is part of the CommandLine Class Project
+#    This file is part of the util library.
 #    
 #    This file may be used under the terms of the GNU General Public
 #    License version 2.0 as published by the Free Software Foundation
@@ -29,40 +29,13 @@ CXX = g++
 APPPATH = app
 OBJS = build/obj/
 BIN  = build/bin/
-INCLUDES = -Iinclude -Iext/include
+INCLUDES = -Iinclude
 
 RES = rc
 OPTFLAGS = -Os
 CFLAGS = $(INCLUDES) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 OSTYPE = $(shell gcc -dumpmachine)
 EXEC = myapp.exe
-
-ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
-    BITS = -m32
-else 
-    BITS = -m64
-endif
-
-ifneq (,$(findstring mingw,$(OSTYPE)))
-    OSTYPE = Windows
-    LIB =
-else
-    ifneq (,$(findstring linux,$(OSTYPE)))
-        OSTYPE = Linux
-        LIB =
-    else ifneq (,$(findstring freebsd,$(OSTYPE)))
-        OSTYPE = FreeBSD
-        LIB =
-    else ifneq (,$(findstring solaris,$(OSTYPE)))
-        OSTYPE = Solaris
-        LIB = -R/usr/local/lib:/usr/lib/64:/usr/local/lib/sparcv9
-    else ifneq (,$(findstring darwin,$(OSTYPE)))
-        OSTYPE = MacOSX
-        LIB =
-    else
-        $(error Operating System not found)
-    endif
-endif
 
 vpath % app:src:ext/src:ext/src/$(OSTYPE)
 
@@ -77,7 +50,7 @@ all: main charseq
 	@strip $(BIN)$(EXEC)
 
 main: main.cpp
-	@echo Compiling on $(OSTYPE) $(subst -m,,$(BITS))BIT...
+	@echo Compiling...
 	$(call compile,$@)
 
 charseq: charseq.cpp

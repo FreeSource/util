@@ -33,4 +33,4 @@ all :
 	@"$(EXEC)" "C++ is a statically typed, free-form, multi-paradigm, compiled, general-purpose programming language." " " > $(OUTPUT)
 	@"$(EXEC)" "C++#-##-##-##-#is#-##-##-##-#a#-#statically#-#typed,#-#free-form,#-#multi-paradigm,#-#compiled,#-#general-purpose#-#programming#-#language." "#-#" >> $(OUTPUT)
 	@"$(EXEC)" "C++     is       a     statically      typed,         free-form,      multi-paradigm,    compiled,    general-purpose  programming  language." " " >> $(OUTPUT)
-	@"$(EXEC)" "C++||is||a||statically||typed,||free-form,||multi-paradigm,||compiled,||general-purpose||||programming||language." "||" >> $(OUTPUT)
+	@"$(EXEC)" "C++||||is||a||statically||typed,||free-form,||multi-paradigm,||compiled,||general-purpose||||programming||language." "||" >> $(OUTPUT)

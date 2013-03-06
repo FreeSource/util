@@ -34,16 +34,21 @@ using std::endl;
 using namespace util;
 
 int main( int argc, char *argv[] ) {
+    
+    cout << "ORIGINAL->" << argv[1] << "<-" << endl;
+    cout << "DELIMITER->" << argv[2] << "<-" << endl;
+    
     string text = removeDuplicates( argv[1], argv[2] );
-    cout << text << endl;
+    cout << "REMOVE DUPLICATES->" << text << "<-" << endl;
     
     text = convertDelimiterToPipe( text, argv[2] );
-    cout << text << endl;
+    cout << "CONVERT DELIMITER TO PIPE->" << text << "<-" << endl;
     
     vector<string> stringArray;
     stringArray = split( argv[1], argv[2]);
+    cout << "SPLIT:" << endl;
     for ( unsigned position = 0; position < stringArray.size(); ++position ) {
-        cout << stringArray.at( position ) << endl;
+        cout << "->" << stringArray.at( position ) << "<-" << endl;
     }
     cout << "------------------------------------------------------------------" << endl;
 }
