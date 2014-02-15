@@ -40,4 +40,5 @@ namespace util {
     const vector<string> split( string text, const string &delimiter );
     const string trim( string text );
 }
+
 #endif

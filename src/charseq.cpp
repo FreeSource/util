@@ -63,8 +63,7 @@ namespace util {
             while ( getline( str, buffer, '|' ) ) {
                 stringArray.push_back( buffer );
             }
-        }
-        else {
+        } else {
             stringArray.push_back( text );
         }
         return stringArray;
