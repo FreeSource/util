@@ -25,7 +25,36 @@
 #    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # --------------------------------------------------------------------------
 
-EXEC   = ../build/bin/myapp.exe
+OSTYPE = $(shell gcc -dumpmachine)
+
+ifneq (,$(findstring mingw,$(OSTYPE)))
+    OSTYPE = windows
+else
+    ifneq (,$(findstring linux,$(OSTYPE)))
+        OSTYPE = linux
+    else
+        ifneq (,$(findstring freebsd,$(OSTYPE)))
+            OSTYPE = freebsd
+        else
+            ifneq (,$(findstring pc-solaris,$(OSTYPE)))
+                OSTYPE = openindiana
+            else
+                ifneq (,$(findstring solaris,$(OSTYPE)))
+                    OSTYPE = solaris
+                else
+                    ifneq (,$(findstring darwin,$(OSTYPE)))
+                        OSTYPE = macosx
+                    else
+                        $(error Operating System not found)
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+
+BINARY_DIR  = ../build/${OSTYPE}/bin
+EXEC = $(BINARY_DIR)/myapp.exe
 OUTPUT = result.txt
 
 all :

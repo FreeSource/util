@@ -38,10 +38,11 @@ int main( int argc, char *argv[] ) {
     cout << "ORIGINAL->" << argv[1] << "<-" << endl;
     cout << "DELIMITER->" << argv[2] << "<-" << endl;
     
-    string text = removeDuplicates( argv[1], argv[2] );
+    string text = argv[1];
+    replaceAll( text, string( argv[2] ) + string( argv[2] ), argv[2] );
     cout << "REMOVE DUPLICATES->" << text << "<-" << endl;
     
-    text = convertDelimiterToPipe( text, argv[2] );
+    replaceAll( text, argv[2], "|" );
     cout << "CONVERT DELIMITER TO PIPE->" << text << "<-" << endl;
     
     vector<string> stringArray;

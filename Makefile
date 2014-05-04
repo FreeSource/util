@@ -26,28 +26,58 @@
 # --------------------------------------------------------------------------
 
 CXX = g++
-APPPATH = app
-OBJS = build/obj/
-BIN  = build/bin/
-INCLUDES = -Iinclude
-
-RES = rc
-OPTFLAGS = -Os
-CFLAGS = $(INCLUDES) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 OSTYPE = $(shell gcc -dumpmachine)
+APPPATH = app
+OBJECTS = build/${OSTYPE}/obj/
+BINARY_DIR  = build/${OSTYPE}/bin/
+INCLUDE_DIRS = -Iinclude
+OPTFLAGS = -Os
+CFLAGS = $(INCLUDE_DIRS) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 EXEC = myapp.exe
 
-vpath % app:src:ext/src:ext/src/$(OSTYPE)
+ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
+    BITS = -m32
+else 
+    BITS = -m64
+endif
+
+ifneq (,$(findstring mingw,$(OSTYPE)))
+    OSTYPE = windows
+else
+    ifneq (,$(findstring linux,$(OSTYPE)))
+        OSTYPE = linux
+    else
+        ifneq (,$(findstring freebsd,$(OSTYPE)))
+            OSTYPE = freebsd
+        else
+            ifneq (,$(findstring pc-solaris,$(OSTYPE)))
+                OSTYPE = openindiana
+            else
+                ifneq (,$(findstring solaris,$(OSTYPE)))
+                    OSTYPE = solaris
+                else
+                    ifneq (,$(findstring darwin,$(OSTYPE)))
+                        OSTYPE = macosx
+                    else
+                        $(error Operating System not found)
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+
+vpath % app:src
 
 define compile
     @echo $(subst _$(OSTYPE),,$1)
-    @$(CXX) $^ -c -o $(OBJS)$@.o $(CFLAGS)
+    @$(CXX) $^ -c -o $(OBJECTS)$@.o $(CFLAGS)
 endef
 
-all: main charseq
+all: clean main charseq
 	@echo Linking...
-	@$(CXX) -o $(BIN)$(EXEC) $(OBJS)*.o $(LIB) $(CFLAGS)
-	@strip $(BIN)$(EXEC)
+	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECTS)*.o $(LIB) $(CFLAGS)
+	@strip $(BINARY_DIR)$(EXEC)
 
 main: main.cpp
 	@echo Compiling...
@@ -57,7 +87,8 @@ charseq: charseq.cpp
 	$(call compile,$@)
 
 .PHONY: clean
+
 clean:
 	@echo Cleaning...
-	@rm -f $(BIN)*.exe
-	@rm -f $(OBJS)*.o
+	@rm -f $(BINARY_DIR)*.exe
+	@rm -f $(OBJECTS)*.o

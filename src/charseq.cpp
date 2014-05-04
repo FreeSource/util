@@ -33,30 +33,16 @@ namespace util {
     
     using std::istringstream;
     
-    const string removeDuplicates( string text, const string &duplicate ) {
-        while ( text.find( duplicate + duplicate ) != string::npos ) {
-            text.replace( text.find( duplicate + duplicate ), duplicate.length() * 2, duplicate );
+    void replaceAll( string &source, const string &find, const string &replace ) {
+        while ( source.find( find ) != string::npos ) {
+            source.replace( source.find( find ), find.length(), replace );
         }
-        return text;
-    }
-    
-    const string convertDelimiterToPipe( string text, const string &delimiter ) {
-        size_t pos = 0;
-        pos = text.find( delimiter, pos );
-        
-        while ( pos != string::npos ) {
-            text.replace( pos, delimiter.size(), "|" );
-            ++pos;
-            pos = text.find( delimiter, pos );
-        }
-        return text;
     }
     
     const vector<string> split( string text, const string &delimiter ) {
         vector<string> stringArray;
         if ( text.find( delimiter ) != string::npos ) {
-            text = removeDuplicates( text, delimiter );
-            text = convertDelimiterToPipe( text, delimiter );
+            replaceAll( text, delimiter, "|" );
             
             string buffer;
             istringstream str( text );
