@@ -2,7 +2,7 @@
    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
     
     File: util.cpp
-    Version: 1.0.0
+    Version: 2.0.0
     Copyright: (C) 2012 by Enzo Roberto Verlato
     Contact: enzover@ig.com.br
     All rights reserved.
@@ -40,24 +40,37 @@ namespace util {
     }
     
     const vector<string> split( string text, const string &delimiter ) {
-        vector<string> stringArray;
-        if ( text.find( delimiter ) != string::npos ) {
-            replaceAll( text, delimiter, "|" );
-            
-            string buffer;
-            istringstream str( text );
-            while ( getline( str, buffer, '|' ) ) {
-                stringArray.push_back( buffer );
-            }
-        } else {
-            stringArray.push_back( text );
+        vector<string> strArray;
+        replaceAll( text, delimiter, "|" );
+        string buffer;
+        istringstream str( text );
+        while ( getline( str, buffer, '|' ) ) {
+            strArray.push_back( buffer );
         }
-        return stringArray;
+        return strArray;
     }
     
-    const string trim( string text ) {
-        static const char whitespace[] = " \n\t\v\r\f";
+    void trim( string &text ) {
+        static const char whitespace[] = " \n\t\v\r\f ";
         text.erase( 0, text.find_first_not_of( whitespace ) );
-        return text.erase( text.find_last_not_of( whitespace ) + 1U );
+        text.erase( text.find_last_not_of( whitespace ) + 1U );
+    }
+    
+    const vector<string> wrapText( string text, const size_t &length ) {
+        vector<string> lines;
+        string::size_type spacePos;
+        
+        while ( !text.empty() ) {
+            spacePos = text.rfind( ' ', length );
+            
+            if ( spacePos == string::npos || text.size() <= length ) {
+                lines.push_back( text );
+                break;
+            } else {
+                lines.push_back( text.substr( 0, spacePos + 1 ) );
+                text.erase( 0, spacePos + 1 );
+            }
+        }
+        return lines;
     }
 }

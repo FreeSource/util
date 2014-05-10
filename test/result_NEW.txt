@@ -1,0 +1,114 @@
+ORIGINAL->C++ is a statically typed, free-form, multi-paradigm, compiled, general-purpose programming language.<-
+DELIMITER-> <-
+REMOVE DUPLICATES->C++ is a statically typed, free-form, multi-paradigm, compiled, general-purpose programming language.<-
+CONVERT DELIMITER TO PIPE->C++|is|a|statically|typed,|free-form,|multi-paradigm,|compiled,|general-purpose|programming|language.<-
+SPLIT:
+->C++<-
+->is<-
+->a<-
+->statically<-
+->typed,<-
+->free-form,<-
+->multi-paradigm,<-
+->compiled,<-
+->general-purpose<-
+->programming<-
+->language.<-
+------------------------------------------------------------------
+ORIGINAL->C++#-##-##-##-#is#-##-##-##-#a#-#statically#-#typed,#-#free-form,#-#multi-paradigm,#-#compiled,#-#general-purpose#-#programming#-#language.<-
+DELIMITER->#-#<-
+REMOVE DUPLICATES->C++#-#is#-#a#-#statically#-#typed,#-#free-form,#-#multi-paradigm,#-#compiled,#-#general-purpose#-#programming#-#language.<-
+CONVERT DELIMITER TO PIPE->C++|is|a|statically|typed,|free-form,|multi-paradigm,|compiled,|general-purpose|programming|language.<-
+SPLIT:
+->C++<-
+-><-
+-><-
+-><-
+->is<-
+-><-
+-><-
+-><-
+->a<-
+->statically<-
+->typed,<-
+->free-form,<-
+->multi-paradigm,<-
+->compiled,<-
+->general-purpose<-
+->programming<-
+->language.<-
+------------------------------------------------------------------
+ORIGINAL->C++     is       a     statically      typed,         free-form,      multi-paradigm,    compiled,    general-purpose  programming  language.<-
+DELIMITER-> <-
+REMOVE DUPLICATES->C++ is a statically typed, free-form, multi-paradigm, compiled, general-purpose programming language.<-
+CONVERT DELIMITER TO PIPE->C++|is|a|statically|typed,|free-form,|multi-paradigm,|compiled,|general-purpose|programming|language.<-
+SPLIT:
+->C++<-
+-><-
+-><-
+-><-
+-><-
+->is<-
+-><-
+-><-
+-><-
+-><-
+-><-
+-><-
+->a<-
+-><-
+-><-
+-><-
+-><-
+->statically<-
+-><-
+-><-
+-><-
+-><-
+-><-
+->typed,<-
+-><-
+-><-
+-><-
+-><-
+-><-
+-><-
+-><-
+-><-
+->free-form,<-
+-><-
+-><-
+-><-
+-><-
+-><-
+->multi-paradigm,<-
+-><-
+-><-
+-><-
+->compiled,<-
+-><-
+-><-
+-><-
+->general-purpose<-
+-><-
+->programming<-
+-><-
+->language.<-
+------------------------------------------------------------------
+ORIGINAL->C++||||is||a||statically||typed,||free-form,||multi-paradigm,||compiled,||general-purpose||||programming||language.<-
+DELIMITER->||<-
+REMOVE DUPLICATES->C++||is||a||statically||typed,||free-form,||multi-paradigm,||compiled,||general-purpose||programming||language.<-
+CONVERT DELIMITER TO PIPE->C++|is|a|statically|typed,|free-form,|multi-paradigm,|compiled,|general-purpose|programming|language.<-
+SPLIT:
+->C++<-
+->is<-
+->a<-
+->statically<-
+->typed,<-
+->free-form,<-
+->multi-paradigm,<-
+->compiled,<-
+->general-purpose<-
+->programming<-
+->language.<-
+------------------------------------------------------------------

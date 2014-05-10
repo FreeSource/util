@@ -27,13 +27,15 @@
 
 CXX = g++
 OSTYPE = $(shell gcc -dumpmachine)
-APPPATH = app
-OBJECTS = build/${OSTYPE}/obj/
+APP_DIR = app
+OBJECT_DIR = build/${OSTYPE}/obj/
+LIBRARY_DIR = build/${OSTYPE}/lib/
 BINARY_DIR  = build/${OSTYPE}/bin/
-INCLUDE_DIRS = -Iinclude
+INCLUDE_DIR = -Iinclude
 OPTFLAGS = -Os
-CFLAGS = $(INCLUDE_DIRS) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
+CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 EXEC = myapp.exe
+LIBNAME = environs.a
 
 ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
     BITS = -m32
@@ -71,12 +73,13 @@ vpath % app:src
 
 define compile
     @echo $(subst _$(OSTYPE),,$1)
-    @$(CXX) $^ -c -o $(OBJECTS)$@.o $(CFLAGS)
+    @$(CXX) $^ -c -o $(OBJECT_DIR)$@.o $(CFLAGS)
 endef
 
 all: clean main charseq
 	@echo Linking...
-	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECTS)*.o $(LIB) $(CFLAGS)
+	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECT_DIR)*.o $(LIB) $(CFLAGS)
+	@ar rs $(LIBRARY_DIR)$(LIBNAME) $(OBJECT_DIR)charseq.o
 	@strip $(BINARY_DIR)$(EXEC)
 
 main: main.cpp
@@ -91,4 +94,5 @@ charseq: charseq.cpp
 clean:
 	@echo Cleaning...
 	@rm -f $(BINARY_DIR)*.exe
-	@rm -f $(OBJECTS)*.o
+	@rm -f $(OBJECT_DIR)*.o
+	@rm -f $(LIBRARY_DIR)*.a
