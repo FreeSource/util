@@ -78,7 +78,7 @@ endef
 
 all: clean main charseq
 	@echo Linking...
-	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECT_DIR)*.o $(LIB) $(CFLAGS)
+	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECT_DIR)*.o $(CFLAGS)
 	@ar rs $(LIBRARY_DIR)$(LIBNAME) $(OBJECT_DIR)charseq.o
 	@strip $(BINARY_DIR)$(EXEC)
 
