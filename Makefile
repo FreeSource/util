@@ -8,7 +8,7 @@
 #    All rights reserved.
 #    
 # --------------------------------------------------------------------------
-#    This file is part of the util library.
+#    This file is part of the util Project.
 #    
 #    This file may be used under the terms of the GNU General Public
 #    License version 2.0 as published by the Free Software Foundation
@@ -34,8 +34,8 @@ BINARY_DIR  = build/${OSTYPE}/bin/
 INCLUDE_DIR = -Iinclude
 OPTFLAGS = -Os
 CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
-EXEC = myapp.exe
 LIBNAME = environs.a
+EXEC = myapp.exe
 
 ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
     BITS = -m32
@@ -59,7 +59,7 @@ else
                     OSTYPE = solaris
                 else
                     ifneq (,$(findstring darwin,$(OSTYPE)))
-                        OSTYPE = macosx
+                        OSTYPE = macos
                     else
                         $(error Operating System not found)
                     endif
@@ -83,7 +83,7 @@ all: clean main charseq
 	@strip $(BINARY_DIR)$(EXEC)
 
 main: main.cpp
-	@echo Compiling...
+	@echo Compiling on $(OSTYPE) $(subst -m,,$(BITS))BIT...
 	$(call compile,$@)
 
 charseq: charseq.cpp
