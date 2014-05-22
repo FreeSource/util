@@ -2,7 +2,7 @@
 #    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 #    
 #    File: Makefile
-#    Version: 1.0.0
+#    Version: 3.0.0
 #    Copyright: (C) 2012 by Enzo Roberto Verlato
 #    Contact: enzover@ig.com.br
 #    All rights reserved.
@@ -28,10 +28,11 @@
 CXX = g++
 OSTYPE = $(shell gcc -dumpmachine)
 APP_DIR = app
+EXTLIBRARY_DIR = ext/sys/${OSTYPE}/lib/
 OBJECT_DIR = build/${OSTYPE}/obj/
 LIBRARY_DIR = build/${OSTYPE}/lib/
 BINARY_DIR  = build/${OSTYPE}/bin/
-INCLUDE_DIR = -Iinclude
+INCLUDE_DIR = -Iinclude -Iext/include
 OPTFLAGS = -Os
 CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 LIBNAME = environs.a
@@ -54,6 +55,7 @@ else
         else
             ifneq (,$(findstring pc-solaris,$(OSTYPE)))
                 OSTYPE = openindiana
+                #LIB = -R/usr/local/lib:/usr/lib/64:/usr/local/lib/sparcv9
             else
                 ifneq (,$(findstring solaris,$(OSTYPE)))
                     OSTYPE = solaris
@@ -69,7 +71,7 @@ else
     endif
 endif
 
-vpath % app:src
+vpath % app:src:src/$(OSTYPE)
 
 define compile
     @echo $(subst _$(OSTYPE),,$1)
@@ -78,7 +80,7 @@ endef
 
 all: clean main charseq
 	@echo Linking...
-	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECT_DIR)*.o $(CFLAGS)
+	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECT_DIR)* $(CFLAGS)
 	@ar rs $(LIBRARY_DIR)$(LIBNAME) $(OBJECT_DIR)charseq.o
 	@strip $(BINARY_DIR)$(EXEC)
 
