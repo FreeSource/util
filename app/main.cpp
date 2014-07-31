@@ -8,7 +8,7 @@
     All rights reserved.
     
 ----------------------------------------------------------------------------
-    This file is part of the CommandLine Class.
+    This file is part of the util library.
     
     This file may be used under the terms of the GNU General Public
     License version 2.0 as published by the Free Software Foundation
